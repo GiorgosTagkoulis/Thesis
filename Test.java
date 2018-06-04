@@ -14,29 +14,33 @@ public class Test {
    Exbot eb = new Exbot();
    
    // Plays 5 matches of 3 games each
-   while (i < 1){
+   while (i < 5){
    
    	// Loops until game victory
    	while (status < 1) {
     	// Gets a vector of possible moves
+   		//System.out.println("Possible moves: \n" + Arrays.toString(eb.getGame()));
+
     	temp = eb.getPossibleMoves();
-    	temp.toString();
-    	System.out.println("Possible Moves are:");
-   		for(int[] k : temp)
-   			System.out.print(Arrays.toString(k) + "\t");
-   		System.out.println();
+    	//temp.toString();
+    	//for(int[] m: temp)
+    	//	System.out.println(Arrays.toString(m));
+   		//System.out.println();
+   		//System.out.println("Prefered Move: " + Arrays.toString(eb.gtePreferedMove()));
     	if (temp.size()!=0) {
      		// takes the first move in vector and uses it
      		//status = eb.makeMoves(temp.get(0));
-     		status = eb.makeMoves(eb.getPreferedMove());
+     		if(eb.getGame()[52] == 1)
+				status = eb.makeMoves(eb.getPreferedMove());
+			else
+				status = eb.makeMoves(temp.get(0));
     	} else {
      		status = eb.makeMoves(tom);
     	}
    }
    
    // Prints out the how the game looked when finnished
-   System.out.println(eb);
-
+   System.out.println("Won" + eb.getGame()[52] + " with the score:  " + status);
    // Checks if matchs finnished and sets upp next game/match
    i += Math.abs(eb.resolveVictory());
    status = 0;
