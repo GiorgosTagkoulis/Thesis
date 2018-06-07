@@ -3,6 +3,8 @@ import net.*;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Arrays;
+
 public class Player{
 	
 	//static as it is shared between the two players
@@ -40,12 +42,14 @@ public class Player{
 	}
 
 
-	public int[] move(){
+	public int[] move(Vector <int[]> temp, int[] getGame){
 		int[] bestmove = null;
-		int[] originalBoard = eb.getGame();
-		Vector <int[]> temp = eb.getPossibleMoves();
+		//int[] originalBoard = eb.getGame();
+		int[] originalBoard = getGame;		
+		//Vector <int[]> temp = eb.getPossibleMoves();
 		double expectedUtility = -1.0;
 		for (int[] m : temp){
+			//System.out.println(Arrays.toString(m));
 			eb.setGame(originalBoard);
 			eb.makeMoves(m);
 			double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));
@@ -54,8 +58,9 @@ public class Player{
 				bestmove = m;
 				expectedUtility = utility;
 			}
+			eb.setGame(originalBoard);
 		}
-		eb.setGame(originalBoard);
+		//eb.setGame(originalBoard);
 
 		return bestmove;
 	}
