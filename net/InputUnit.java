@@ -1,4 +1,4 @@
-package edu.rice.comp440.net;
+package net;
 
 public class InputUnit implements Unit {
   

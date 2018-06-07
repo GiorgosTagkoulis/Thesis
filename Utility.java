@@ -2,6 +2,10 @@ import java.util.Vector;
 
 
 public class Utility{
+
+  public static double computeUtility(double[] output){
+        return -output[0];
+    }
 	
 	public static Vector<int[]> playerStatus(int[] getGame){
   		Vector<int[]> players = new Vector<int[]>(2);

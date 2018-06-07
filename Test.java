@@ -14,32 +14,38 @@ public class Test {
 		Vector<int[]> playerVector;
 		System.out.println("Start test of Exbot");
 		Exbot eb = new Exbot();
-   
+   		Player player = new Player(eb);
    		// Plays 5 matches of 3 games each
-   		while (i < 1){
+   		while (i < 5){
    
    			// Loops until game victory
    			while (status < 1) {
     			// Gets a vector of possible moves
        			temp = eb.getPossibleMoves();
-    			System.out.println("Player " + eb.getGame()[52] + ":");
+     			
+    			/*System.out.println("Player " + eb.getGame()[52] + ":");
     			System.out.println("GetGame: " + Arrays.toString(eb.getGame()));
     			playerVector = Utility.playerStatus(eb.getGame());
     			playerVector.toString();
     			for(int[] p: playerVector)
     				System.out.println(Arrays.toString(p)); 
     			double [] nninput = Utility.boardToVector(eb.getGame()[52],eb.getGame());
-    			System.out.println(Arrays.toString(nninput) + "\n");		
+    			System.out.println(Arrays.toString(nninput) + "\n"); */
+
     			//temp.toString();
     			//for(int[] m: temp)
-    			//System.out.println(Arrays.toString(m));
+    			//	System.out.println("Manual ones: \n" + Arrays.toString(m));
    				//System.out.println();
-   				//System.out.println("Prefered Move: " + Arrays.toString(eb.gtePreferedMove()));
+   				//System.out.println("Prefered Move: " + Arrays.toString(eb.getPreferedMove()));
+    			
     			if (temp.size()!=0){
      				// takes the first move in vector and uses it
      				//status = eb.makeMoves(temp.get(0));
-     				if(eb.getGame()[52] == PLAYER_1)
-						status = eb.makeMoves(eb.getPreferedMove());
+     				if(eb.getGame()[52] == 1){
+						//status = eb.makeMoves(eb.getPreferedMove());
+						status = eb.makeMoves(player.move());
+						System.out.println("hello");
+					}
 					else
 						status = eb.makeMoves(temp.get(0));
     			} else {
@@ -48,11 +54,11 @@ public class Test {
    			}
    
    			// Prints out the how the game looked when finnished
-   			System.out.println("Won " + eb.getGame()[52] + " with the score:  " + status + "\n\n");
+   			System.out.println("Won " + eb.getGame()[52] + " with the score:  "+
+   								 status);
    			// Checks if matchs finnished and sets upp next game/match
    			i += Math.abs(eb.resolveVictory());
    			status = 0;
    		}
   	}
-
 }
