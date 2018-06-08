@@ -23,40 +23,28 @@ public class Test {
    			while (status < 1) {
     			// Gets a vector of possible moves
        			temp = eb.getPossibleMoves();
-    			/*System.out.println("Player " + eb.getGame()[52] + ":");
-    			System.out.println("GetGame: " + Arrays.toString(eb.getGame()));
-    			playerVector = Utility.playerStatus(eb.getGame());
-    			playerVector.toString();
-    			for(int[] p: playerVector)
-    				System.out.println(Arrays.toString(p)); 
-    			double [] nninput = Utility.boardToVector(eb.getGame()[52],eb.getGame());
-    			System.out.println(Arrays.toString(nninput) + "\n"); */
-
-    			//temp.toString();
-    			//for(int[] m: temp)
-    			//	System.out.println("Manual ones: \n" + Arrays.toString(m));
-   				//System.out.println();
-   				//System.out.println("Prefered Move: " + Arrays.toString(eb.getPreferedMove()));
     			
     			if (temp.size()!=0){
      				// takes the first move in vector and uses it
      				//status = eb.makeMoves(temp.get(0));
-     				if(eb.getGame()[52] == 1){
-     					//System.out.print("Player 1: ");
-     					//System.out.println(Utility.computeUtility(net.getValue(Utility.boardToVector(eb.getGame()[52],eb.getGame()))));
-						//status = eb.makeMoves(eb.getPreferedMove());
-						int[] originalBoard = eb.getGame();
-						System.out.println(Arrays.toString(eb.getGame()));
+     				if(eb.getGame()[52] == 1){			
 						int [] bestMove = player.move(temp, eb.getGame());
-						System.out.println(Arrays.toString(eb.getGame()));
-						//System.out.println("In between");
+						//System.out.println("Move from NN: " + Arrays.toString(bestMove));
+						//System.out.println("Player1 status before: " + status);	
+						//System.out.println(Arrays.toString(bestMove));
+						//System.out.println("Player1 getGame before: " + Arrays.toString(eb.getGame()));
      					//System.out.println("Player " + eb.getGame()[52]+": " +Arrays.toString(bestMove));
+						//status = eb.makeMoves(bestMove);
 						status = eb.makeMoves(eb.getPreferedMove());
-						System.out.println(status);
+						//System.out.println("Player1 status after: " + status);
+						//System.out.println("Player1 getGame after: " + Arrays.toString(eb.getGame()));
 					}
 					else{
 						//System.out.println("Player " + eb.getGame()[52]+": " +Arrays.toString(temp.get(0)));
+						//System.out.println("Player2 Status before: " + status);
 						status = eb.makeMoves(temp.get(0));
+						//status = eb.makeMoves(eb.getPreferedMove());
+						//System.out.println("Player2 status after: " + status + "\n\n");
 					}
     			} else {
      				status = eb.makeMoves(tom);
@@ -66,7 +54,7 @@ public class Test {
    			// Prints out the how the game looked when finnished
    			System.out.println("Won " + eb.getGame()[52] + " with the score:  "+
    								 status);
-   			// Checks if matchs finnished and sets upp next game/match
+   			// Checks if matchs finnished and sets up next game/match
    			i += Math.abs(eb.resolveVictory());
    			status = 0;
    		}

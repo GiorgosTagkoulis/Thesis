@@ -50,17 +50,45 @@ public class Player{
 		double expectedUtility = -1.0;
 		for (int[] m : temp){
 			//System.out.println(Arrays.toString(m));
-			eb.setGame(originalBoard);
-			eb.makeMoves(m);
-			double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));
-			double utility = Utility.computeUtility(output);
-			if(utility > expectedUtility){
-				bestmove = m;
-				expectedUtility = utility;
+			int move = eb.makeMoves(m);
+			switch(move){
+				case 0: 	double[] output = net.getValue(Utility.boardToVector(getGame[52], getGame));
+							double utility = Utility.computeUtility(output);
+							if(utility > expectedUtility){
+								bestmove = m;
+								expectedUtility = utility;
+							}
+							eb.setGame(originalBoard);
+				case 1: 	bestmove = m;
+							eb.setGame(originalBoard);
+				case 2: 	bestmove = m;
+							eb.setGame(originalBoard);
+				case 3: 	bestmove = m;
+							eb.setGame(originalBoard);
+				case 4: 	bestmove = m;
+							eb.setGame(originalBoard);
+				default:	eb.setGame(originalBoard);
+					
 			}
-			eb.setGame(originalBoard);
+		/*	if (move == 0){
+				double[] output = net.getValue(Utility.boardToVector(getGame[52], getGame));
+				double utility = Utility.computeUtility(output);
+				if(utility > expectedUtility){
+					bestmove = m;
+					expectedUtility = utility;
+				}
+				eb.setGame(originalBoard);
+			}
+			else if (move >= 1){
+				bestmove = m;
+				// here I'll train for win
+				eb.setGame(originalBoard);
+				//System.out.println(eb.makeMoves(m));
+			}else{
+				eb.setGame(originalBoard);
+			}*/
 		}
-		//eb.setGame(originalBoard);
+			
 
 		return bestmove;
 	}
