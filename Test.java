@@ -1,12 +1,14 @@
 import java.util.Vector;
 import java.util.Arrays;
+import java.io.IOException;
+import java.io.StreamTokenizer;
 
 /**
  * This class handles rules for the game
  */
 public class Test {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 
 		int i = 0;
 		int status1 = 0;
@@ -17,8 +19,8 @@ public class Test {
 		//Vector<int[]> playerVector;
 		System.out.println("Start test of Exbot");
 		Exbot eb = new Exbot();
-   		Player player1 = new Player(0,0,false, eb);
-   		Player player2 = new Player(0,0,false, eb);
+   		Player player1 = new Player(0.7,0.1,false, eb);
+   		//Player player2 = new Player(0.7,0.1,true, eb);
    		// Plays 5 matches of 3 games each
    		while (i < 5){
    
@@ -38,8 +40,8 @@ public class Test {
 					}
 					else{
 						//status = eb.makeMoves(eb.getPreferedMove());
-						//status2 = eb.makeMoves(temp.get(0));
-						status2 = eb.makeMoves(player2.move(temp, eb.getGame()));
+						status2 = eb.makeMoves(temp.get(0));
+						//status2 = eb.makeMoves(player2.move(temp, eb.getGame()));
 					}
     			} else {
      				if(eb.getGame()[52] == 1)
@@ -51,13 +53,13 @@ public class Test {
 
    			if (status1 > 0){
    				System.out.println("Player 1 won with the score: "+ status1);
-   				player1.won();
-   				player2.lost();
+   				//player1.won(eb.getGame());
+   				//player2.lost(eb.getGame());
    			}
    			else if (status2 > 0){
    				System.out.println("Player 2 won with the score: "+ status2);
-   				player2.won();
-   				player1.lost();
+   				//player2.won(eb.getGame());
+   				//player1.lost(eb.getGame());
    			}
 			
    
@@ -69,5 +71,7 @@ public class Test {
    			status1 = 0; status2 = 0;
    			//status = 0;
    		}
+
+   		player1.net.writeTo("SavedNN");
   	}
 }

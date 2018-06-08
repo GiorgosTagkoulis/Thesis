@@ -92,6 +92,24 @@ public class Player{
 		return bestmove;
 	}
 
+	public void lost(int[] getGame){
+		if(learningMode){
+			double[] in = Utility.boardToVector(getGame[52], getGame);
+			double[] out = net.getValue(in);
+			double[] actual = {0.0};
+			backprop(in, out, actual);
+		}
+	}
+
+	public void won(int[] getGame){
+		if(learningMode){
+			double[] in = Utility.boardToVector(getGame[52], getGame);
+			double[] out = net.getValue(in);
+			double[] actual = {1.0};
+			backprop(in, out, actual);
+		}
+	}
+
 
 	   public static double gradient(HiddenUnit u) {
         return u.getValue() * (1.0 - u.getValue());
