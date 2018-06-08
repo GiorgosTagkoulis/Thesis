@@ -49,10 +49,16 @@ public class Test {
     			}
    			}
 
-   			if (status1 > 0)
+   			if (status1 > 0){
    				System.out.println("Player 1 won with the score: "+ status1);
-   			else if (status2 > 0)
+   				player1.won();
+   				player2.lost();
+   			}
+   			else if (status2 > 0){
    				System.out.println("Player 2 won with the score: "+ status2);
+   				player2.won();
+   				player1.lost();
+   			}
 			
    
    		/*	// Prints out the how the game looked when finnished
