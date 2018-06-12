@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Player{
 	
 	//static as it is shared between the two players
-	public static NeuralNetwork net = new NeuralNetwork(196, new int[] {40, 1});
+	public static NeuralNetwork net = new NeuralNetwork(196, new int[] {100, 1});
 	private final boolean learningMode;
 	private double LAMBDA, ALPHA, BETA;
 	//Not static since each player have its own copy of eligibility traces
