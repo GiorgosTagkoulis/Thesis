@@ -10,19 +10,31 @@ public class Training {
 
 	public static void main(String[] args) throws IOException{
 
-		// Set the number of games that by self play will train the NN
-		int games = 10000;
-		//Initialize the variables responsible for the training
+        // Setting the learning and decay parameters from the terminal
+        int games=0;          // Set the number of games that by self play will train the NN
+        double lambda=0;      // Decay parameter
+        double alpha=0;       // Learning parameter
+        
+        try{
+            games = Integer.parseInt(args[0]);
+            lambda = Double.parseDouble(args[1]);
+            alpha = Double.parseDouble(args[2]);
+        } catch (NumberFormatException nfe) {
+            System.out.println("The first or second argument must be an integer.");
+            System.exit(1);
+        }
+		
+        //Initialize the variables responsible for the training
 		int i = 0; int k = 0;
 		int status1 = 0;
 		int status2 = 0;
-		//int status = 0;
+
 		int[] tom = new int[0];
 		Vector<int[]> temp;
 		System.out.println("Start the training of the Neural Network");
 		Exbot eb = new Exbot();
-   		Player player1 = new Player(0, 0.1, true, eb);
-   		Player player2 = new Player(0, 0.1, true, eb);
+   		Player player1 = new Player(lambda, alpha, true, eb);
+   		Player player2 = new Player(lambda, alpha, true, eb);
 
         long start = System.currentTimeMillis();
    		// Plays 5 matches of 3 games each

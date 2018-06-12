@@ -22,7 +22,7 @@ public class TestStrength {
         Vector<int[]> temp;
         System.out.println("Start testing against the preferedMove()");
         Exbot eb = new Exbot();
-        Random rand = new Random(); // Used to choose a random move from the available in the possibleMoves vector
+        //Random rand = new Random(); // Used to choose a random move from the available in the possibleMoves vector
         Player player = new Player(0.7,0.1,false,eb);
 
         // Plays 5 matches of 3 games each
@@ -56,9 +56,9 @@ public class TestStrength {
                 }
             }
 
-                if (status1 > 0){
-                    k++;
-                }
+            if (status1 > 0){
+                  k++;
+           }
    
             // Checks if matchs finnished and sets up next game/match
             i += Math.abs(eb.resolveVictory());

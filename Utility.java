@@ -7,11 +7,11 @@ public class Utility{
         return -output[0];
     }
 	
-	public static Vector<int[]> playerStatus(int[] getGame){
+	public static Vector<int[]> playerStatus(int player, int[] getGame){
   		Vector<int[]> players = new Vector<int[]>(2);
   		int [] player1 = new int[24];
   		int [] player2 = new int[24];
-  		if(getGame[52] == 1){  // 1 means player 1
+  		if(player == 1){  // 1 means player 1
   			System.arraycopy(getGame, 1, player1, 0, 24);
   			System.arraycopy(getGame, 27, player2, 0, 24);
   			players.add(player1); players.add(player2);
@@ -51,7 +51,7 @@ public class Utility{
 
   	public static double[] boardToVector(int player, int[] getGame){
   		double[] input = new double[196];
-  		Vector<int[]> players = playerStatus(getGame);
+  		Vector<int[]> players = playerStatus(player, getGame);
   		int [] player1 = players.get(0);
   		int [] player2 = players.get(1);
   		int counter = 0;

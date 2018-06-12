@@ -44,18 +44,32 @@ public class Player{
 
 	public int[] move(Vector <int[]> temp, int[] getGame){
 		int[] bestmove = null;
-		//int[] originalBoard = eb.getGame();
+
 		int[] originalBoard = getGame;
 		int[] nextBoard = null;
 		int currentPlayer = getGame[52];		
-		//Vector <int[]> temp = eb.getPossibleMoves();
-		double expectedUtility = -1.0;
+
+		//double expectedUtility = -1.0;	// When I check whether the utility of the opponent in minimun
+		double expectedUtility = 0.0;		// When I check whether the utility of the current player is maximum
 		for (int[] m : temp){
-			//System.out.println(Arrays.toString(m));
-			int move = eb.makeMoves(m);
+		/*	eb.makeMoves(m);
+			//	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
+			//	double utility = Utility.computeUtility(output);	
+			double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
+			double utility = -Utility.computeUtility(output);
+			
+			if(utility > expectedUtility){
+				bestmove = m;
+				expectedUtility = utility;
+				nextBoard = eb.getGame();
+			}
+			eb.setGame(originalBoard);		*/
+			int move = eb.makeMoves(m);		
 			switch(move){
-				case 0: 	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));
-							double utility = Utility.computeUtility(output);
+				case 0: //	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
+						//	double utility = Utility.computeUtility(output);	
+							double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
+							double utility = -Utility.computeUtility(output);
 							if(utility > expectedUtility){
 								bestmove = m;
 								expectedUtility = utility;
@@ -78,8 +92,8 @@ public class Player{
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
 				default:	eb.setGame(originalBoard);
-					
-			}
+															
+			}				
 		}
 		
 		if(learningMode){
