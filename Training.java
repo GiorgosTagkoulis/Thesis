@@ -11,7 +11,7 @@ public class Training {
 	public static void main(String[] args) throws IOException{
 
 		// Set the number of games that by self play will train the NN
-		int games = 1000;
+		int games = 10000;
 		//Initialize the variables responsible for the training
 		int i = 0; int k = 0;
 		int status1 = 0;
@@ -21,8 +21,10 @@ public class Training {
 		Vector<int[]> temp;
 		System.out.println("Start the training of the Neural Network");
 		Exbot eb = new Exbot();
-   		Player player1 = new Player(0.7,0.1,true, eb);
-   		Player player2 = new Player(0.7,0.1,true, eb);
+   		Player player1 = new Player(0, 0.1, true, eb);
+   		Player player2 = new Player(0, 0.1, true, eb);
+
+        long start = System.currentTimeMillis();
    		// Plays 5 matches of 3 games each
    		while (i < games){
    
@@ -50,7 +52,6 @@ public class Training {
    			}
 
    			if (status1 > 0){
-   				k++;
    				player1.won(eb.getGame());
    				player2.lost(eb.getGame());
    			}
@@ -61,12 +62,16 @@ public class Training {
 
    			// Checks if matchs finnished and sets up next game/match
    			i += Math.abs(eb.resolveVictory());
-   			if (i%100 == 0){
+   			if (i%1000 == 0){
    				System.out.println(i);
    			}
    			status1 = 0; status2 = 0;
    		}
 
-   		player1.net.writeTo("SavedNN");
+        player1.net.writeTo("SavedNN");
+
+        long elapsedTime = System.currentTimeMillis() - start;
+        System.out.println("Total time in min: " + elapsedTime/60000);
+
   	}
 }

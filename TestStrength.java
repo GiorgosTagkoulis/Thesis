@@ -2,6 +2,7 @@ import java.util.Vector;
 import java.util.Arrays;
 import java.io.IOException;
 import java.io.StreamTokenizer;
+import java.util.Random;
 
 /**
  * This class handles rules for the game
@@ -21,6 +22,7 @@ public class TestStrength {
         Vector<int[]> temp;
         System.out.println("Start testing against the preferedMove()");
         Exbot eb = new Exbot();
+        Random rand = new Random(); // Used to choose a random move from the available in the possibleMoves vector
         Player player = new Player(0.7,0.1,false,eb);
 
         // Plays 5 matches of 3 games each
@@ -31,15 +33,20 @@ public class TestStrength {
             //while (status < 1){
                 // Gets a vector of possible moves
                 temp = eb.getPossibleMoves();
-            
-                if (temp.size()!=0){
+                int vectorSize = temp.size();
+
+                if (vectorSize != 0){
 
                     if(eb.getGame()[52] == 1){      
                         int [] bestMove = player.move(temp, eb.getGame());
                         status1 = eb.makeMoves(bestMove);
                     }
                     else{
+                        // Play with preferedMove
                         status2 = eb.makeMoves(eb.getPreferedMove());
+
+                        //Play with a random move from the vector of possible moves
+                        //status2 = eb.makeMoves(temp.get(rand.nextInt(vectorSize)));
                     }
                 }else {
                     if(eb.getGame()[52] == 1)
@@ -61,6 +68,6 @@ public class TestStrength {
             status1 = 0; status2 = 0;
         }
 
-        System.out.println("NN won " + k + "times or" (100*k)/games + "% of the times: ");
+        System.out.println("NN won " + k + " times or " + (double) (100*k)/games + "% of the times: ");
     }
 }
