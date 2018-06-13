@@ -41,6 +41,16 @@ public class Player{
         }
 	}
 
+	/**
+	 * Changing the valiables ALPHA, BETA and LAMBDA. 
+	 * 
+	 */
+	public void setVariables(double lambda, double alpha){
+		LAMBDA = lambda;
+		ALPHA = alpha*0.8;
+        BETA = alpha*0.2; 
+	}
+
 
 	public int[] move(Vector <int[]> temp, int[] getGame){
 		int[] bestmove = null;

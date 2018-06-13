@@ -78,16 +78,34 @@ public class Training {
    			i += Math.abs(eb.resolveVictory());
    			status1 = 0; status2 = 0;
 
+
             // Simply to have an idea where the training is
             if (i%1000 == 0){
                 System.out.println(i);
             }
+            // Needs more testing if we would want to change the parameters regarding their
+            // actual divergence or convergence. It is performed more intuitively here
+            switch(i){
+                case 10000:     Player.net.writeTo("10k");
+
+                case 50000:     Player.net.writeTo("50k");
+                                player1.setVariables(0.7, 0.3);
+                                player2.setVariables(0.7, 0.3);
+
+                case 100000:    Player.net.writeTo("100k");
+                                player1.setVariables(0.0, 0.1);
+                                player2.setVariables(0.0, 0.1);
+
+                case 200000:    Player.net.writeTo("200k");
+
+                    default:    continue;                                
+            }
+
    		}
 
-        player1.net.writeTo("SavedNN");
+        Player.net.writeTo("SavedNN");
 
         long elapsedTime = System.currentTimeMillis() - start;
         System.out.println("Total time in min: " + elapsedTime/60000);
-
   	}
 }
