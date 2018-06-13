@@ -17,13 +17,12 @@ public class TestStrength {
         int i = 0; int k = 0;
         int status1 = 0;
         int status2 = 0;
-        //int status = 0;
         int[] tom = new int[0];
         Vector<int[]> temp;
         System.out.println("Start testing against the preferedMove()");
         Exbot eb = new Exbot();
-        //Random rand = new Random(); // Used to choose a random move from the available in the possibleMoves vector
-        Player player = new Player(0.7,0.1,false,eb);
+        //Random rand = new Random(); // Used to choose a random move from the available ones in the possibleMoves vector
+        Player player = new Player(0.0,0.0,false,eb);
 
         // Plays 5 matches of 3 games each
         while (i < games){

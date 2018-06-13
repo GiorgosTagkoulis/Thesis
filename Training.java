@@ -15,12 +15,14 @@ public class Training {
         double lambda=0;      // Decay parameter
         double alpha=0;       // Learning parameter
         
+        // Therefore if someone wants to run 10000 games with λ=0.7 and α=0.1 through the terminal, then it can
+        // be performed like that: java Training 10000 0.7 0.1
         try{
             games = Integer.parseInt(args[0]);
             lambda = Double.parseDouble(args[1]);
             alpha = Double.parseDouble(args[2]);
         } catch (NumberFormatException nfe) {
-            System.out.println("The first or second argument must be an integer.");
+            System.out.println("Wrong arguments through the terminal");
             System.exit(1);
         }
 		
@@ -37,7 +39,7 @@ public class Training {
    		Player player2 = new Player(lambda, alpha, true, eb);
 
         long start = System.currentTimeMillis();
-   		// Plays 5 matches of 3 games each
+   		// Plays the matches that train the NN
    		while (i < games){
    
    			// Loops until game victory
@@ -47,7 +49,7 @@ public class Training {
        			temp = eb.getPossibleMoves();
     			
     			if (temp.size()!=0){
-
+                    // separate player 1 from player 2 (-1)
      				if(eb.getGame()[52] == 1){			
 						int [] bestMove = player1.move(temp, eb.getGame());
                         status1 = eb.makeMoves(bestMove);
@@ -74,10 +76,12 @@ public class Training {
 
    			// Checks if matchs finnished and sets up next game/match
    			i += Math.abs(eb.resolveVictory());
-   			if (i%1000 == 0){
-   				System.out.println(i);
-   			}
    			status1 = 0; status2 = 0;
+
+            // Simply to have an idea where the training is
+            if (i%1000 == 0){
+                System.out.println(i);
+            }
    		}
 
         player1.net.writeTo("SavedNN");

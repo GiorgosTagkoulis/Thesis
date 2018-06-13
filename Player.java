@@ -49,9 +49,11 @@ public class Player{
 		int[] nextBoard = null;
 		int currentPlayer = getGame[52];		
 
-		//double expectedUtility = -1.0;	// When I check whether the utility of the opponent in minimun
-		double expectedUtility = 0.0;		// When I check whether the utility of the current player is maximum
+		//double expectedUtility = -1.0;	// When I check whether the utility of the opponent in minimun (for other player)
+		double expectedUtility = 0.0;		// When I check whether the utility of the current player is maximum (for current player)
 		for (int[] m : temp){
+		// This piece of code is used if I would want to choose a move without taking care if it is the winning one,
+		// but letting the NN to choose the one according to its weight tuning and the value it returns. 	
 		/*	eb.makeMoves(m);
 			//	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
 			//	double utility = Utility.computeUtility(output);	
@@ -64,6 +66,8 @@ public class Player{
 				nextBoard = eb.getGame();
 			}
 			eb.setGame(originalBoard);		*/
+		// In this piece of code, if there's winning move, we deviate the NN, pick that particular move and then during the training
+		// we let the won(), lost() to train the NN.
 			int move = eb.makeMoves(m);		
 			switch(move){
 				case 0: //	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
@@ -77,18 +81,28 @@ public class Player{
 							}
 							eb.setGame(originalBoard);
 				case 1: 	bestmove = m;
+						//	expectedUtility = 0.0;		// For other player
+							expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();
 							eb.setGame(originalBoard);
 				case 2: 	bestmove = m;
+						//	expectedUtility = 0.0;		// For other player
+							expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
 				case 3: 	bestmove = m;
+						//	expectedUtility = 0.0;		// For other player
+							expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
 				case 4: 	bestmove = m;
+						//	expectedUtility = 0.0;		// For other player
+							expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
 				case 6:		bestmove = m;
+						//	expectedUtility = 0.0;		// For other player
+							expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
 				default:	eb.setGame(originalBoard);
