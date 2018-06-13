@@ -42,7 +42,7 @@ public class Player{
 	}
 
 	/**
-	 * Changing the valiables ALPHA, BETA and LAMBDA. 
+	 * Changing the valiables ALPHA, BETA and LAMBDA since the parameters need to decay after with time
 	 * 
 	 */
 	public void setVariables(double lambda, double alpha){

@@ -45,7 +45,7 @@ public class TestStrength {
                         status2 = eb.makeMoves(eb.getPreferedMove());
 
                         //Play with a random move from the vector of possible moves
-                        //status2 = eb.makeMoves(temp.get(rand.nextInt(vectorSize)));
+                      /*  status2 = eb.makeMoves(temp.get(rand.nextInt(vectorSize))); */
                     }
                 }else {
                     if(eb.getGame()[52] == 1)
@@ -61,6 +61,9 @@ public class TestStrength {
    
             // Checks if matchs finnished and sets up next game/match
             i += Math.abs(eb.resolveVictory());
+
+            status1 = 0; status2 = 0;
+            
             if (i%100 == 0){
                 System.out.println(i);
             }
