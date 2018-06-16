@@ -26,7 +26,7 @@ public class Training {
             System.exit(1);
         }
 		
-        //Initialize the variables responsible counting during training
+        //Initialize the variables responsible for counting during training
 		int i = 0; int k = 0;
 		int status1 = 0;
 		int status2 = 0;
@@ -41,15 +41,40 @@ public class Training {
         long start = System.currentTimeMillis();
    		// Plays the matches that train the NN
    		while (i < games){
+
+            // This is just to track the training 
+            if (i%25000 == 0){
+                System.out.println(i);
+            }
+
+            // Needs more testing if we would want to change the parameters regarding their
+            // actual divergence or convergence. It is performed more intuitively here
+            switch(i){
+                case 10000:     Player.net.writeTo("10k");
+                                player1.setVariables(0.7, 0.3);
+                                player2.setVariables(0.7, 0.3);
+                                System.out.println("Variables have changed (10k)");                                
+                                break;
+                case 50000:     Player.net.writeTo("50k");
+                                break;
+                case 100000:    Player.net.writeTo("100k");
+                                player1.setVariables(0.0, 0.1);
+                                player2.setVariables(0.0, 0.1);
+                                System.out.println("Variables have changed (100k)");
+                                break;
+                case 200000:    Player.net.writeTo("200k");
+                                break;
+                    default:    break;                                
+            }            
    
-   			// Loops until game victory
+   			// This is where the game is played. Loops until game victory.
    			while (status1 < 1 && status2 < 1) {
    			
     			// Gets a vector of possible moves
        			temp = eb.getPossibleMoves();
     			
     			if (temp.size()!=0){
-                    // separate player 1 from player 2 (-1)
+                    // separate player 1 (1) from player 2 (-1)
      				if(eb.getGame()[52] == 1){			
 						int [] bestMove = player1.move(temp, eb.getGame());
                         status1 = eb.makeMoves(bestMove);
@@ -65,10 +90,6 @@ public class Training {
     			}
    			}
 
-            // Checks if matchs finnished and sets up next game/match
-            i += Math.abs(eb.resolveVictory());
-            status1 = 0; status2 = 0;
-
             // Here is performed the training of the NN when the game has ended
    			if (status1 > 0){
    				player1.won(eb.getGame());
@@ -79,30 +100,9 @@ public class Training {
    				player1.lost(eb.getGame());
    			}
 
-            // This is just to track the training 
-            if (i%25000 == 0){
-                System.out.println(i);
-            }
-
-            // Needs more testing if we would want to change the parameters regarding their
-            // actual divergence or convergence. It is performed more intuitively here
-            switch(i){
-                case 10000:     Player.net.writeTo("10k");
-                                break;
-                case 50000:     Player.net.writeTo("50k");
-                                player1.setVariables(0.7, 0.3);
-                                player2.setVariables(0.7, 0.3);
-                                System.out.println("Variables have changed (50k)");
-                                break;
-                case 100000:    Player.net.writeTo("100k");
-                                player1.setVariables(0.0, 0.1);
-                                player2.setVariables(0.0, 0.1);
-                                System.out.println("Variables have changed (100k)");
-                                break;
-                case 200000:    Player.net.writeTo("200k");
-                                break;
-                    default:    break;                                
-            }
+            // Checks if matchs finnished and sets up next game/match
+            i += Math.abs(eb.resolveVictory());
+            status1 = 0; status2 = 0;
 
    		}
 

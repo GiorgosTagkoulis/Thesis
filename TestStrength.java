@@ -29,12 +29,10 @@ public class TestStrength {
    
             // Loops until game victory
             while (status1 < 1 && status2 < 1) {
-            //while (status < 1){
                 // Gets a vector of possible moves
                 temp = eb.getPossibleMoves();
-                int vectorSize = temp.size();
 
-                if (vectorSize != 0){
+                if (temp.size() != 0){
 
                     if(eb.getGame()[52] == 1){      
                         int [] bestMove = player.move(temp, eb.getGame());
@@ -45,7 +43,7 @@ public class TestStrength {
                         status2 = eb.makeMoves(eb.getPreferedMove());
 
                         //Play with a random move from the vector of possible moves
-                      /*  status2 = eb.makeMoves(temp.get(rand.nextInt(vectorSize))); */
+                      /*  status2 = eb.makeMoves(temp.get(rand.nextInt(temp.size()))); */
                     }
                 }else {
                     if(eb.getGame()[52] == 1)
@@ -57,7 +55,7 @@ public class TestStrength {
 
             if (status1 > 0){
                   k++;
-           }
+            }
    
             // Checks if matchs finnished and sets up next game/match
             i += Math.abs(eb.resolveVictory());
@@ -67,7 +65,6 @@ public class TestStrength {
             if (i%100 == 0){
                 System.out.println(i);
             }
-            status1 = 0; status2 = 0;
         }
 
         System.out.println("NN won " + k + " times or " + (double) (100*k)/games + "% of the times: ");

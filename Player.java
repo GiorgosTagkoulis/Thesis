@@ -59,8 +59,8 @@ public class Player{
 		int[] nextBoard = null;
 		int currentPlayer = getGame[52];		
 
-		//double expectedUtility = -1.0;	// When I check whether the utility of the opponent in minimun (for other player)
-		double expectedUtility = 0.0;		// When I check whether the utility of the current player is maximum (for current player)
+		double expectedUtility = -1.0;	// When I check whether the utility of the opponent is minimun (for other player)
+		//double expectedUtility = 0.0;		// When I check whether the utility of the current player is maximum (for current player)
 		for (int[] m : temp){
 		// This piece of code is used if I would want to choose a move without taking care if it is the winning one,
 		// but letting the NN to choose the one according to its weight tuning and the value it returns. 	
@@ -76,46 +76,53 @@ public class Player{
 				nextBoard = eb.getGame();
 			}
 			eb.setGame(originalBoard);		*/
-		// In this piece of code, if there's winning move, we deviate the NN, pick that particular move and then during the training
-		// we let the won(), lost() to train the NN.
+		// In this piece of code, if there's winning move, we deviate the NN, pick that particular move with the highest
+		//	winning reward(if possible) and then during the training we let the won(), lost() to train the NN.
 			int move = eb.makeMoves(m);		
 			switch(move){
-				case 0: //	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
-						//	double utility = Utility.computeUtility(output);	
-							double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
-							double utility = -Utility.computeUtility(output);
+				case 0: 	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
+							double utility = Utility.computeUtility(output);	
+						//	double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
+						//	double utility = -Utility.computeUtility(output); /*It's '-Utility...' because I want the positive value*/
 							if(utility > expectedUtility){
 								bestmove = m;
 								expectedUtility = utility;
 								nextBoard = eb.getGame();
 							}
 							eb.setGame(originalBoard);
+							break;
 				case 1: 	bestmove = m;
-						//	expectedUtility = 0.0;		// For other player
-							expectedUtility = 1.0;		// For current player
+							expectedUtility = 0.0;		// For other player
+						//	expectedUtility = 1.0;		// For current player
 							nextBoard = eb.getGame();
 							eb.setGame(originalBoard);
+							break;
 				case 2: 	bestmove = m;
-						//	expectedUtility = 0.0;		// For other player
-							expectedUtility = 1.0;		// For current player
+							expectedUtility = 0.0;		// For other player
+						//	expectedUtility = 1.5;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
+							break;
 				case 3: 	bestmove = m;
-						//	expectedUtility = 0.0;		// For other player
-							expectedUtility = 1.0;		// For current player
+							expectedUtility = 0.0;		// For other player
+						//	expectedUtility = 2.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
+							break;
 				case 4: 	bestmove = m;
-						//	expectedUtility = 0.0;		// For other player
-							expectedUtility = 1.0;		// For current player
+							expectedUtility = 0.0;		// For other player
+						//	expectedUtility = 2.5;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
+							break;
 				case 6:		bestmove = m;
-						//	expectedUtility = 0.0;		// For other player
-							expectedUtility = 1.0;		// For current player
+							expectedUtility = 0.0;		// For other player
+						//	expectedUtility = 3.0;		// For current player
 							nextBoard = eb.getGame();				
 							eb.setGame(originalBoard);
+							break;
 				default:	eb.setGame(originalBoard);
+							break;
 															
 			}				
 		}
@@ -132,7 +139,8 @@ public class Player{
 
 	public void lost(int[] getGame){
 		if(learningMode){
-			double[] in = Utility.boardToVector(getGame[52], getGame);
+			// It's '-getGame[52]' because when there is win, the active player does not change
+			double[] in = Utility.boardToVector(-getGame[52], getGame); 
 			double[] out = net.getValue(in);
 			double[] actual = {0.0};
 			backprop(in, out, actual);
