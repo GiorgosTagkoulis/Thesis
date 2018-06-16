@@ -64,26 +64,26 @@ public class Player{
 		for (int[] m : temp){
 		// This piece of code is used if I would want to choose a move without taking care if it is the winning one,
 		// but letting the NN to choose the one according to its weight tuning and the value it returns. 	
-		/*	eb.makeMoves(m);
-			//	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
-			//	double utility = Utility.computeUtility(output);	
-			double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
-			double utility = -Utility.computeUtility(output);
+			eb.makeMoves(m);
+			double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
+			double utility = Utility.computeUtility(output);	
+		//	double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
+		//	double utility = -Utility.computeUtility(output);
 			
 			if(utility > expectedUtility){
 				bestmove = m;
 				expectedUtility = utility;
 				nextBoard = eb.getGame();
 			}
-			eb.setGame(originalBoard);		*/
+			eb.setGame(originalBoard);		
 		// In this piece of code, if there's winning move, we deviate the NN, pick that particular move with the highest
 		//	winning reward(if possible) and then during the training we let the won(), lost() to train the NN.
-			int move = eb.makeMoves(m);		
+		/*	int move = eb.makeMoves(m);		
 			switch(move){
 				case 0: 	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
 							double utility = Utility.computeUtility(output);	
 						//	double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
-						//	double utility = -Utility.computeUtility(output); /*It's '-Utility...' because I want the positive value*/
+						//	double utility = -Utility.computeUtility(output); //It's '-Utility...' because I want the positive value
 							if(utility > expectedUtility){
 								bestmove = m;
 								expectedUtility = utility;
@@ -124,7 +124,7 @@ public class Player{
 				default:	eb.setGame(originalBoard);
 							break;
 															
-			}				
+			}				*/
 		}
 		
 		if(learningMode){

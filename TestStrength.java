@@ -24,7 +24,7 @@ public class TestStrength {
         //Random rand = new Random(); // Used to choose a random move from the available ones in the possibleMoves vector
         Player player = new Player(0.0,0.0,false,eb);
 
-        // Plays 5 matches of 3 games each
+        // Plays the numbers og games indicated by the variable games
         while (i < games){
    
             // Loops until game victory

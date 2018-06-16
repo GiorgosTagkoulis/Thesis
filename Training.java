@@ -56,13 +56,16 @@ public class Training {
                                 System.out.println("Variables have changed (10k)");                                
                                 break;
                 case 50000:     Player.net.writeTo("50k");
-                                break;
-                case 100000:    Player.net.writeTo("100k");
                                 player1.setVariables(0.0, 0.1);
                                 player2.setVariables(0.0, 0.1);
-                                System.out.println("Variables have changed (100k)");
+                                System.out.println("Variables have changed (50k)");
+                                break;
+                case 100000:    Player.net.writeTo("100k");
                                 break;
                 case 200000:    Player.net.writeTo("200k");
+                                player1.setVariables(0.0, 0.01);
+                                player2.setVariables(0.0, 0.01);
+                                System.out.println("Variables have changed (200k)");
                                 break;
                     default:    break;                                
             }            
