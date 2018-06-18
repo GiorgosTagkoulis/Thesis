@@ -39,6 +39,7 @@ public class Training {
    		Player player2 = new Player(lambda, alpha, true, eb);
 
         long start = System.currentTimeMillis();
+        long elapsedTime = 0;
    		// Plays the matches that train the NN
    		while (i < games){
 
@@ -51,15 +52,25 @@ public class Training {
             // actual divergence or convergence. It is performed more intuitively here
             switch(i){
                 case 10000:     Player.net.writeTo("10k");
-                                player1.setVariables(0.7, 0.3);
-                                player2.setVariables(0.7, 0.3);
-                                System.out.println("Variables have changed (10k)");                                
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (10k): " + elapsedTime/60000);                                                           
+                                break;
+                case 20000:     Player.net.writeTo("20k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (20k): " + elapsedTime/60000);                                                           
+                                break;
+                case 30000:     Player.net.writeTo("30k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Variables have changed (30k): " + elapsedTime/60000);
+                                break;
+                case 40000:     Player.net.writeTo("40k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Variables have changed (40k): " + elapsedTime/60000);
                                 break;
                 case 50000:     Player.net.writeTo("50k");
-                                player1.setVariables(0.0, 0.1);
-                                player2.setVariables(0.0, 0.1);
-                                System.out.println("Variables have changed (50k)");
-                                break;
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Variables have changed (50k): " + elapsedTime/60000);
+                                break;                                
                 case 100000:    Player.net.writeTo("100k");
                                 break;
                 case 200000:    Player.net.writeTo("200k");
@@ -111,7 +122,7 @@ public class Training {
 
         Player.net.writeTo("SavedNN");
 
-        long elapsedTime = System.currentTimeMillis() - start;
+        elapsedTime = System.currentTimeMillis() - start;
         System.out.println("Total time in min: " + elapsedTime/60000);
   	}
 }
