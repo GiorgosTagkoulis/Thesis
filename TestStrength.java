@@ -27,6 +27,10 @@ public class TestStrength {
         // Plays the numbers og games indicated by the variable games
         while (i < games){
    
+            if (i%250 == 0){
+                System.out.println(i);
+            }
+            
             // Loops until game victory
             while (status1 < 1 && status2 < 1) {
                 // Gets a vector of possible moves
@@ -62,9 +66,6 @@ public class TestStrength {
 
             status1 = 0; status2 = 0;
             
-            if (i%100 == 0){
-                System.out.println(i);
-            }
         }
 
         System.out.println("NN won " + k + " times or " + (double) (100*k)/games + "% of the times: ");

@@ -42,7 +42,7 @@ public class Player{
 	}
 
 	/**
-	 * Changing the valiables ALPHA, BETA and LAMBDA since the parameters need to decay after with time
+	 * Changing the valiables ALPHA, BETA and LAMBDA during training
 	 * 
 	 */
 	public void setVariables(double lambda, double alpha){
@@ -76,55 +76,6 @@ public class Player{
 				nextBoard = eb.getGame();
 			}
 			eb.setGame(originalBoard);		
-		// In this piece of code, if there's winning move, we deviate the NN, pick that particular move with the highest
-		//	winning reward(if possible) and then during the training we let the won(), lost() to train the NN.
-		/*	int move = eb.makeMoves(m);		
-			switch(move){
-				case 0: 	double[] output = net.getValue(Utility.boardToVector(eb.getGame()[52], eb.getGame()));	//For other player
-							double utility = Utility.computeUtility(output);	
-						//	double[] output = net.getValue(Utility.boardToVector(currentPlayer, eb.getGame()));		//For current player
-						//	double utility = -Utility.computeUtility(output); //It's '-Utility...' because I want the positive value
-							if(utility > expectedUtility){
-								bestmove = m;
-								expectedUtility = utility;
-								nextBoard = eb.getGame();
-							}
-							eb.setGame(originalBoard);
-							break;
-				case 1: 	bestmove = m;
-							expectedUtility = 0.0;		// For other player
-						//	expectedUtility = 1.0;		// For current player
-							nextBoard = eb.getGame();
-							eb.setGame(originalBoard);
-							break;
-				case 2: 	bestmove = m;
-							expectedUtility = 0.0;		// For other player
-						//	expectedUtility = 1.5;		// For current player
-							nextBoard = eb.getGame();				
-							eb.setGame(originalBoard);
-							break;
-				case 3: 	bestmove = m;
-							expectedUtility = 0.0;		// For other player
-						//	expectedUtility = 2.0;		// For current player
-							nextBoard = eb.getGame();				
-							eb.setGame(originalBoard);
-							break;
-				case 4: 	bestmove = m;
-							expectedUtility = 0.0;		// For other player
-						//	expectedUtility = 2.5;		// For current player
-							nextBoard = eb.getGame();				
-							eb.setGame(originalBoard);
-							break;
-				case 6:		bestmove = m;
-							expectedUtility = 0.0;		// For other player
-						//	expectedUtility = 3.0;		// For current player
-							nextBoard = eb.getGame();				
-							eb.setGame(originalBoard);
-							break;
-				default:	eb.setGame(originalBoard);
-							break;
-															
-			}				*/
 		}
 		
 		if(learningMode){

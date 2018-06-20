@@ -43,11 +43,6 @@ public class Training {
    		// Plays the matches that train the NN
    		while (i < games){
 
-            // This is just to track the training 
-            if (i%25000 == 0){
-                System.out.println(i);
-            }
-
             // Needs more testing if we would want to change the parameters regarding their
             // actual divergence or convergence. It is performed more intuitively here
             switch(i){
@@ -61,22 +56,23 @@ public class Training {
                                 break;
                 case 30000:     Player.net.writeTo("30k");
                                 elapsedTime = System.currentTimeMillis() - start;
-                                System.out.println("Variables have changed (30k): " + elapsedTime/60000);
+                                System.out.println("Total time in min so far (30k): " + elapsedTime/60000);
                                 break;
                 case 40000:     Player.net.writeTo("40k");
                                 elapsedTime = System.currentTimeMillis() - start;
-                                System.out.println("Variables have changed (40k): " + elapsedTime/60000);
+                                System.out.println("Total time in min so far (40k): " + elapsedTime/60000);
                                 break;
                 case 50000:     Player.net.writeTo("50k");
                                 elapsedTime = System.currentTimeMillis() - start;
-                                System.out.println("Variables have changed (50k): " + elapsedTime/60000);
+                                System.out.println("Total time in min so far (50k): " + elapsedTime/60000);
                                 break;                                
-                case 100000:    Player.net.writeTo("100k");
+                case 75000:     Player.net.writeTo("75k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (75k): " + elapsedTime/60000);
                                 break;
-                case 200000:    Player.net.writeTo("200k");
-                                player1.setVariables(0.0, 0.01);
-                                player2.setVariables(0.0, 0.01);
-                                System.out.println("Variables have changed (200k)");
+                case 100000:    Player.net.writeTo("100k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (100k): " + elapsedTime/60000);
                                 break;
                     default:    break;                                
             }            
