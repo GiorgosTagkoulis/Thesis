@@ -74,6 +74,18 @@ public class Training {
                                 elapsedTime = System.currentTimeMillis() - start;
                                 System.out.println("Total time in min so far (100k): " + elapsedTime/60000);
                                 break;
+                case 125000:    Player.net.writeTo("125k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (125k): " + elapsedTime/60000);
+                                break;
+                case 150000:    Player.net.writeTo("150k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (150k): " + elapsedTime/60000);
+                                break;
+                case 175000:    Player.net.writeTo("175k");
+                                elapsedTime = System.currentTimeMillis() - start;
+                                System.out.println("Total time in min so far (175k): " + elapsedTime/60000);
+                                break;
                     default:    break;                                
             }            
    
