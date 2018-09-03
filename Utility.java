@@ -4,7 +4,9 @@ import java.util.Vector;
 public class Utility{
 
   public static double computeUtility(double[] output){
-        return -output[0];
+        return -output[0];      // The array output has only one element (because we have only one output unit) 
+                                // and since we try to minimize the utility for the "other player", we take the 
+                                // negative value of the output unit
     }
 	
 	public static Vector<int[]> playerStatus(int player, int[] getGame){
@@ -15,7 +17,6 @@ public class Utility{
   			System.arraycopy(getGame, 1, player1, 0, 24);
   			System.arraycopy(getGame, 27, player2, 0, 24);
   			players.add(player1); players.add(player2);
-  			return players;
   		}else{
   			//Player 1
   			for (int i=0; i<12; i++)

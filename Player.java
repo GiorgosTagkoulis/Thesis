@@ -113,7 +113,6 @@ public class Player{
     }
 
 
-
     /* Ew and Ev must be set up somewhere to the proper size and set to 0 */
     public void backprop(double[] in, double[] out, double[] expected) {
         /* compute eligibility traces */
